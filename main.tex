@@ -74,7 +74,28 @@ subsubsectionstyle=show/shaded/hide]
 
 \section{Why Think About Hardware}
 
-% TODO: Add a "Recap: where we are" slide, and an introduction to part B
+\begin{frame}{Recap: where we are}
+    Part A left us with a small but complete AI system: an AI model behind a versioned, validated, authenticated, logged, and rate-limited HTTP API, with a Python client that talks to it like any commercial AI service.
+
+    \vspace{0.5em}
+    You may have already felt its limits.
+    \begin{itemize}
+        \item Slow to respond, especially with heavier models
+        \item Only as capable as the single computer it runs on, no matter how much Async we add
+        \item Tied to your own machine, awkward to ship to anyone else
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Welcome to Part B}
+    Top AI models from OpenAI, Anthropic, and Google are too big to fit on a consumer computer, yet they serve millions of people every day.
+    Part B is about the infrastructure and deployment techniques that make this possible.
+
+    \begin{itemize}
+        \item \textbf{B.1 AI hardware:} the hardware AI runs on, and what makes some of it specialized for AI
+        \item \textbf{B.2, B.3 Containers:} package an AI system so it runs the same anywhere
+        \item \textbf{B.4 Cloud, B.5 Edge:} the two kinds of infrastructure we deploy onto
+    \end{itemize}
+\end{frame}
 
 \begin{frame}{The marketing claim and the reality}
     Vendors love to slap AI onto every new device.
@@ -302,7 +323,7 @@ For modern AI models, we want to load a large chunk of data into the memory as f
 
 \begin{frame}{Where the chips come in}
     The two limitations point to the same conclusion.
-    AI workloads need hardware that are designed to efficiently handle AI computing workloads.
+    AI workloads need hardware that is designed to efficiently handle AI computing workloads.
 
     \begin{itemize}
         \item Many simple operations in parallel
@@ -343,7 +364,7 @@ In reality, GPUs still dominate in specialized hardware for AI computing.
 \end{frame}
 
 \begin{frame}{Neural Processing Unit (NPU)}
-    GPUs and TPUs both target high end computing.
+    GPUs and TPUs both target high-end computing.
     NPUs target the low end: consumer devices like phones, tablets, and laptops.
 
     \begin{itemize}
@@ -408,6 +429,17 @@ In reality, GPUs still dominate in specialized hardware for AI computing.
 
     \vspace{0.5em}
     By the end you should have a hands-on feel for why specialized hardware matters, and a number you can point to next time someone tries to sell you an AI computer.
+\end{frame}
+
+\begin{frame}{What you should walk away with}
+    By the end of the exercise, you should be able to:
+    \begin{enumerate}
+        \item Be familiar with the Von Neumann architecture
+        \item Understand the pros and cons of generic computing hardware and specialized AI computing hardware
+    \end{enumerate}
+
+    \vspace{0.5em}
+In the next module, we will learn an essential software infrastructure that makes deploying our AI system to any Von Neumann architecture computer much easier.
 \end{frame}
 
 
