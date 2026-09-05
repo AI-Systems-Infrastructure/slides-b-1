@@ -65,11 +65,13 @@
     \end{figure}
 \end{frame}
 
+
 \begin{frame}
 \tableofcontents[sectionstyle=show,
 subsectionstyle=show/shaded/hide,
 subsubsectionstyle=show/shaded/hide]
 \end{frame}
+
 
 
 \section{Why Think About Hardware}
@@ -86,6 +88,7 @@ subsubsectionstyle=show/shaded/hide]
     \end{itemize}
 \end{frame}
 
+
 \begin{frame}{Welcome to Part B}
     Top AI models from OpenAI, Anthropic, and Google are too big to fit on a consumer computer, yet they serve millions of people every day.
     Part B is about the infrastructure and deployment techniques that make this possible.
@@ -96,6 +99,7 @@ subsubsectionstyle=show/shaded/hide]
         \item \textbf{B.4 Cloud, B.5 Edge:} the two kinds of infrastructure we deploy onto
     \end{itemize}
 \end{frame}
+
 
 \begin{frame}{The marketing claim and the reality}
     Vendors love to slap AI onto every new device.
@@ -110,6 +114,7 @@ subsubsectionstyle=show/shaded/hide]
     \end{itemize}
 \end{frame}
 
+
 \begin{frame}{Two questions for this module}
 \begin{enumerate}
 \item How is a general-purpose computer actually put together?
@@ -119,6 +124,7 @@ subsubsectionstyle=show/shaded/hide]
     \vspace{0.5em}
     We use a restaurant kitchen as a running analogy throughout.
 \end{frame}
+
 
 
 \section{Von Neumann Architecture}
@@ -138,6 +144,7 @@ subsubsectionstyle=show/shaded/hide]
     \vspace{0.5em}
     Each role maps to a component in the architecture.
 \end{frame}
+
 
 \begin{frame}[fragile]{Instructions and data}
     Two kinds of information flow through the kitchen and the computer.
@@ -187,6 +194,7 @@ subsubsectionstyle=show/shaded/hide]
 
 \end{frame}
 
+
 \begin{frame}{The architecture, at a glance}
     \begin{figure}[htpb]
         \begin{center}
@@ -194,6 +202,7 @@ subsubsectionstyle=show/shaded/hide]
         \end{center}
     \end{figure}
 \end{frame}
+
 
 \begin{frame}{CPU: the chefs}
     The \textbf{Central Processing Unit} executes instructions on data.
@@ -210,6 +219,7 @@ subsubsectionstyle=show/shaded/hide]
     \end{block}
 \end{frame}
 
+
 \begin{frame}{Memory: the pantry}
     Holds both instructions and data.
     Like a pantry that stores both recipe books and ingredients on the same shelves.
@@ -224,6 +234,7 @@ subsubsectionstyle=show/shaded/hide]
     Volatility is why our unsaved work disappears when the computer crashes.
 \end{frame}
 
+
 \begin{frame}{I/O: the waiters}
     The \textbf{input/output system} is how data and programs come into the computer from the outside world, and how results go back out.
     Like the waiters who carry orders into the kitchen and dishes out to the customers.
@@ -237,6 +248,7 @@ subsubsectionstyle=show/shaded/hide]
 Each \textbf{I/O device} is connected through a small piece of hardware called an \textbf{I/O controller} that takes care of the device-specific details, so the rest of the computer can treat all of them in a relatively uniform way.
 \end{frame}
 
+
 \begin{frame}{Bus: the corridors}
     The set of wires that move instructions and data between every other component.
     Like the corridors and counters that let staff and trolleys carry orders, ingredients, and dishes around the kitchen.
@@ -249,6 +261,7 @@ Each \textbf{I/O device} is connected through a small piece of hardware called a
 
     Three logical parts: address bus (which location), data bus (the actual contents), control bus (timing and coordination).
 \end{frame}
+
 
 \begin{frame}{Tracing through one program}
     The DKK to USD converter from earlier.
@@ -264,6 +277,7 @@ Each \textbf{I/O device} is connected through a small piece of hardware called a
 A modern Von Neumann architecture computer repeats this loop billions of times per second.
 \end{frame}
 
+
 \begin{frame}{Example: Raspberry Pi 5}
 A credit card-size Von Neumann architecture computer.
 
@@ -275,6 +289,7 @@ A credit card-size Von Neumann architecture computer.
 
     CPU in the middle, RAM next to it, I/O around the edges, copper traces between them serve as the bus.
 \end{frame}
+
 
 
 \section{Where Generic Hardware Falls Short}
@@ -293,6 +308,7 @@ A credit card-size Von Neumann architecture computer.
     \end{block}
 \end{frame}
 
+
 \begin{frame}{Sequential CPU vs parallel work}
 Most of the math inside a neural network is \textbf{matrix multiplication}.
     For a single matrix multiplication there can be hundreds of thousands of these tiny calculations, and none of them depend on each other.
@@ -304,6 +320,7 @@ A CPU faced with this kind of work is a bit like a \textit{university professor}
     \vspace{0.5em}
 A whole class of \textit{primary school students}, each only able to do basic arithmetic, can power through the same stack much faster.
 \end{frame}
+
 
 \begin{frame}{The memory wall}
 There are two opposing aspects of memory performance.
@@ -317,6 +334,7 @@ A CPU's memory is built around low latency at the cost of bandwidth. Typical DDR
 
 For modern AI models, we want to load a large chunk of data into the memory as fast as possible, which biases towards memory bandwidth.
 \end{frame}
+
 
 
 \section{Specialized Hardware for AI}
@@ -334,6 +352,7 @@ For modern AI models, we want to load a large chunk of data into the memory as f
     Several families of chips have been built around this idea, each at a different sweet spot of generality and efficiency.
 \end{frame}
 
+
 \begin{frame}{Graphics Processing Unit (GPU)}
     As the name suggests, GPUs were originally designed for computer graphics, not AI.
 
@@ -346,6 +365,7 @@ For modern AI models, we want to load a large chunk of data into the memory as f
 \caption*{A GPU usually comes with thousands of small cores, plus memory built for bandwidth (GDDR7 around 1.8 TB/s, HBM above 2 TB/s).}
     \end{figure}
 \end{frame}
+
 
 \begin{frame}{Tensor Processing Unit (TPU)}
     GPUs are still general-purpose enough to handle graphics, scientific simulation, and video encoding.
@@ -362,6 +382,7 @@ For modern AI models, we want to load a large chunk of data into the memory as f
 
 In reality, GPUs still dominate in specialized hardware for AI computing.
 \end{frame}
+
 
 \begin{frame}{Neural Processing Unit (NPU)}
     GPUs and TPUs both target high-end computing.
@@ -388,6 +409,7 @@ In reality, GPUs still dominate in specialized hardware for AI computing.
     \end{figure}
 \end{frame}
 
+
 \begin{frame}{Coming back to Von Neumann}
     Specialized hardware is what makes most modern AI systems practical, but it has not replaced the Von Neumann architecture.
 
@@ -405,6 +427,7 @@ In reality, GPUs still dominate in specialized hardware for AI computing.
 \end{frame}
 
 
+
 \section{Exercise}
 
 \begin{frame}{Run a model on different hardware}
@@ -420,6 +443,7 @@ In reality, GPUs still dominate in specialized hardware for AI computing.
     \end{block}
 \end{frame}
 
+
 \begin{frame}{Extensions}
     \begin{enumerate}
         \item Print the parameter count and estimate the model's memory footprint at 4 bytes per parameter
@@ -431,6 +455,7 @@ In reality, GPUs still dominate in specialized hardware for AI computing.
     By the end you should have a hands-on feel for why specialized hardware matters, and a number you can point to next time someone tries to sell you an AI computer.
 \end{frame}
 
+
 \begin{frame}{What you should walk away with}
     By the end of the exercise, you should be able to:
     \begin{enumerate}
@@ -441,6 +466,7 @@ In reality, GPUs still dominate in specialized hardware for AI computing.
     \vspace{0.5em}
 In the next module, we will learn an essential software infrastructure that makes deploying our AI system to any Von Neumann architecture computer much easier.
 \end{frame}
+
 
 
 \appendix
