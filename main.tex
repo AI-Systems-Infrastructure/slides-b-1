@@ -474,37 +474,32 @@ Unfortunately, these are two opposing properties of a memory system.
 \end{frame}
 
 
+\section{Summary}
+
 \begin{frame}{Coming back to Von Neumann}
-    Specialized hardware is what makes most modern AI systems practical, but it has not replaced the Von Neumann architecture.
+  Specialized hardware for AI compute \textbf{plugs into} the Von Neumann architecture rather than replacing it.
 
-\vspace{0.5em}
-    Look at any modern computer, even a real AI computer in a data center.
-    \begin{itemize}
-        \item A CPU sits at the center
-        \item GPUs, TPUs, or NPUs attach as accelerators through the bus
-        \item All share access to memory, coordinated by the OS on the CPU
-    \end{itemize}
+  % TODO: Embed an online image of how a GPU plugs into the Von Neumann architecture through attaching to the bus.
+\end{frame}
 
-    \vspace{0.5em}
-    The CPU is still the executive chef.
-    The accelerators are highly skilled sous chefs hired for one specialty.
-\note{
-}
+\begin{frame}{Coming back to Von Neumann}
+\begin{itemize}
+  \item Specialized hardware accelerates the matrix multiplication parts of computing an AI model
+  \item The rest of the Von Neumann architecture handles the rest of an AI system
+\end{itemize}
+We still need all Von Neumann components, on top of specialized hardware, to build an ``AI computer''.
+
+  % TODO: Embed an online image showing the recent RAM crisis
 \end{frame}
 
 
-
-\section{Exercise}
-
-\begin{frame}{Run a model on different hardware}
-    The point of the exercise is to feel the difference between CPU and GPU on the same model.
-    Use Google Colab or AI-LAB, and reuse the image classification setup from Module A.4.
+\begin{frame}{Exercise}{Feel the difference with or without specialized hardware}
+    Run the image classification model from Module A.4 on \textbf{Google Colab} or \textbf{AI-LAB} where you can choose to use GPUs or not.
 
     \begin{block}{Outline}
         \begin{enumerate}
-            \item Move the model and a batch onto whichever device the runtime exposes via \texttt{.to(device)}, where device is \texttt{"cuda"} or \texttt{"cpu"}
-            \item Switch the runtime between CPU and GPU. Restart and rerun after each switch
-            \item Time how long one image takes on each device. Average over a few runs, since the first run has warm-up overhead
+          \item Switch the runtime between CPU and GPU and run the same code (inference of an image classification model)
+          \item Time how long one inference takes on each device
         \end{enumerate}
     \end{block}
 \note{
@@ -512,31 +507,13 @@ Unfortunately, these are two opposing properties of a memory system.
 \end{frame}
 
 
-\begin{frame}{Extensions}
-    \begin{enumerate}
-        \item Print the parameter count and estimate the model's memory footprint at 4 bytes per parameter
-        \item Switch to a heavier model like ResNet-152 or a HuggingFace ViT and repeat the timing. The CPU-GPU gap should grow
-        \item Run a small batch of images at once. GPU performance scales with batch size much better than CPU performance does
-    \end{enumerate}
+\begin{frame}{Preview of the next module}
+\begin{itemize}
+  \item \textbf{In this module:} Most computers follow the same architecture, so an AI system should work on all of them
+  \item \textbf{In the next module:} Technical nuances of ``works everywhere'', and how to deploy our AI system on any* computer with ease
+\end{itemize}
 
-    \vspace{0.5em}
-    By the end you should have a hands-on feel for why specialized hardware matters, and a number you can point to next time someone tries to sell you an AI computer.
-\note{
-}
-\end{frame}
-
-
-\begin{frame}{What you should walk away with}
-    By the end of the exercise, you should be able to:
-    \begin{enumerate}
-        \item Be familiar with the Von Neumann architecture
-        \item Understand the pros and cons of generic computing hardware and specialized AI computing hardware
-    \end{enumerate}
-
-    \vspace{0.5em}
-In the next module, we will learn an essential software infrastructure that makes deploying our AI system to any Von Neumann architecture computer much easier.
-\note{
-}
+% TODO: Embed figures/module-b2-container-ship.pdf
 \end{frame}
 
 
