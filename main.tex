@@ -140,246 +140,207 @@ subsubsectionstyle=show/shaded/hide]
 \end{frame}
 
 
-\section{Why Think About Hardware}
-
-\begin{frame}{Recap: where we are}
-    Part A left us with a small but complete AI system: an AI model behind a versioned, validated, authenticated, logged, and rate-limited HTTP API, with a Python client that talks to it like any commercial AI service.
-
-    \vspace{0.5em}
-    You may have already felt its limits.
-    \begin{itemize}
-        \item Slow to respond, especially with heavier models
-        \item Only as capable as the single computer it runs on, no matter how much Async we add
-        \item Tied to your own machine, awkward to ship to anyone else
-    \end{itemize}
-\note{
-}
-\end{frame}
-
-
-\begin{frame}{Welcome to Part B}
-    Top AI models from OpenAI, Anthropic, and Google are too big to fit on a consumer computer, yet they serve millions of people every day.
-    Part B is about the infrastructure and deployment techniques that make this possible.
-
-    \begin{itemize}
-        \item \textbf{B.1 AI hardware:} the hardware AI runs on, and what makes some of it specialized for AI
-        \item \textbf{B.2, B.3 Containers:} package an AI system so it runs the same anywhere
-        \item \textbf{B.4 Cloud, B.5 Edge:} the two kinds of infrastructure we deploy onto
-    \end{itemize}
-\note{
-}
-\end{frame}
-
-
-\begin{frame}{The marketing claim and the reality}
-    Vendors love to slap AI onto every new device.
-    Marketing pages keep talking about AI computers and AI-ready laptops as if a new kind of machine has been invented just for the hype.
-
-    \vspace{0.5em}
-    The reality is much less dramatic.
-    \begin{itemize}
-        \item In 1945, John von Neumann sketched a design that would become the basis for almost every general-purpose computer built since
-        \item Eighty years later, smartphones, gaming PCs, our laptops, even those new AI computers all follow the same design
-        \item The hardware has gotten faster, smaller, and cheaper, but the basic recipe has not changed
-    \end{itemize}
-\note{
-}
-\end{frame}
-
-
-\begin{frame}{Two questions for this module}
-\begin{enumerate}
-\item How is a general-purpose computer actually put together?
-\item Where does that design fall short for AI workloads, and what kinds of specialized chips have been added to fill those gaps?
-\end{enumerate}
-
-    \vspace{0.5em}
-    We use a restaurant kitchen as a running analogy throughout.
-\note{
-}
-\end{frame}
-
-
 
 \section{Von Neumann Architecture}
 
-\begin{frame}{The kitchen}
-    Imagine a busy kitchen with everything that goes on inside it.
+\begin{frame}{What is a computer?}{Iterations of computers}
+  From a consumer standpoint: Computers have become more powerful, can be used to do more stuff, and come with more form factors.
 
-    \begin{itemize}
-        \item Orders and recipes coming in
-        \item Ingredients ready to be cooked
-        \item Chefs preparing dishes
-        \item A pantry that stores both ingredients and recipe books
-        \item Waiters carrying orders in and food out
-        \item Corridors connecting every part of the kitchen
-    \end{itemize}
+  % TODO: Embed an image found online of the timeline of iterations of consumer computers
+\end{frame}
 
-    \vspace{0.5em}
-    Each role maps to a component in the architecture.
+\begin{frame}{What is a computer?}{The architecture that stands the test of time}
+  From an architecture standpoint: The Von Neumann Architecture has dominated most computers since the early 1950s, and so has how a computer works fundamentally.
+
+  % TODO: Embed an image that best represents the dominance of the architecture, corresponding to the image in the previous slide
+\end{frame}
+
+\begin{frame}{What is a computer?}{How a computer works fundamentally}
+  Process \textbf{data} following \textbf{instructions}.
+
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+\begin{block}{Data}
+\begin{itemize}
+\item dkk\_price: 599
+\item conversion\_factor: 0.1570
+\item usd\_price: to be calculated
+\end{itemize}
+\end{block}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{block}{Instructions}
+\begin{enumerate}
+\item LOAD dkk\_price
+\item MULTIPLY dkk\_price by conversion\_factor
+\item STORE the result in usd\_price
+\item DISPLAY usd\_price
+\end{enumerate}
+\end{block}
+\end{column}
+
+\end{columns}
+
 \note{
+  No matter how complicated the software is, it will be broken down into data and instructions to be run on computers.
 }
 \end{frame}
 
 
-\begin{frame}[fragile]{Instructions and data}
-    Two kinds of information flow through the kitchen and the computer.
+\begin{frame}{Overview of the Von Neumann Architecture}
+  A philosophical architecture to build a computer that can process data following instructions.
 
-    \begin{block}{Instructions: the recipe}
-        A step-by-step description of how to handle ingredients and tools.
-
-\begin{minipage}[t]{0.48\textwidth}
-\begin{minted}{text}
-1. Cut the onion into pieces.
-2. Heat the pan to medium heat.
-3. Add 2 tablespoons of oil.
-4. Sauté the onions until golden.
-\end{minted}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.48\textwidth}
-\begin{minted}{text}
-1. LOAD dkk_price
-2. MULTIPLY dkk_price by conversion_factor
-3. STORE the result in usd_price
-4. DISPLAY usd_price
-\end{minted}
-\end{minipage}
-
-    \end{block}
-
-    \begin{block}{Data: the ingredients}
-        The information the instructions operate on.
-
-\begin{minipage}[t]{0.48\textwidth}
-\begin{minted}{text}
-- 2 large onions
-- Olive oil
-\end{minted}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.48\textwidth}
-\begin{minted}{text}
-- dkk_price: 599
-- conversion_factor: 0.1570
-- usd_price: to be calculated
-\end{minted}
-\end{minipage}
-
-    \end{block}
-
-\note{
-}
+  % TODO: Embed figures/module-b1-computer-architecture.pdf
 \end{frame}
 
+\begin{frame}{Central Processing Unit (CPU)}
+  Processes instructions on data. Composed of two sub-components: the arithmetic logic unit (ALU) and the control unit (CU).
 
-\begin{frame}{The architecture, at a glance}
-    \begin{figure}[htpb]
-        \begin{center}
-            \includegraphics[width=0.6\textwidth]{von-neumann}
-        \end{center}
-    \end{figure}
-\note{
-}
+  % TODO: Embed online images of modern CPUs (from Intel, AMD, and ARM)
 \end{frame}
 
+\begin{frame}{Central Processing Unit (CPU)}{Arithmetic logic unit (ALU)}
+  Capable of executing instructions that are broken into \textbf{elementary operations}.
 
-\begin{frame}{CPU: the chefs}
-    The \textbf{Central Processing Unit} executes instructions on data.
-    Like the chefs who follow recipes to turn ingredients into dishes.
-
-    \begin{block}{Control unit, the executive chef}
-        Reads orders and recipes, figures out what needs to happen next, tells everyone else what to do.
-        Fetches the next instruction, decodes it, signals the rest of the CPU to carry it out.
-    \end{block}
-
-    \begin{block}{Arithmetic logic unit, the cooks}
-        Performs the elementary operations that make up every program: arithmetic, logic, comparisons, bit manipulation.
-        A modern CPU usually contains more than one ALU per core.
-    \end{block}
-\note{
-}
+  \begin{itemize}
+    \item Arithmetic: addition, subtraction, multiplication, division
+    \item Logical operations: AND, OR, NOT, XOR
+    \item Comparisons: equal, greater than, less than
+    \item Bit manipulation: shifts, rotations, \dots
+  \end{itemize}
 \end{frame}
 
+\begin{frame}{Central Processing Unit (CPU)}{Arithmetic logic unit (ALU)}
 
-\begin{frame}{Memory: the pantry}
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+  \textbf{Conceptually:} ALUs are logical circuits that can execute elementary operations.
+
+  % TODO: Embed a representative online image of one simple logical circuit (for example an XOR gate)
+\end{column}
+
+\begin{column}{0.5\textwidth}
+  \textbf{IRL:} ALUs were made of vacuum tubes in the early days, and of extremely small transistors nowadays.
+
+  % TODO: Embed representative online images of ALUs made of vacuum tubes and transistors IRL
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Central Processing Unit (CPU)}{Arithmetic logic unit (ALU)}
+  ALUs can be simulated in video games with proper logical circuits.
+
+  % TODO: Embed two online images, showing example ALUs made in Minecraft and Terraria
+\end{frame}
+
+\begin{frame}{Central Processing Unit (CPU)}{Control unit (CU)}
+  Fetching and breaking down instructions and data into elementary operations ALUs can execute.
+
+  % TODO: Embed an online image of how CU and ALU work together. This image should also include memory to transition to the next slide.
+\end{frame}
+
+\begin{frame}{Memory}
     Holds both instructions and data.
-    Like a pantry that stores both recipe books and ingredients on the same shelves.
 
     \begin{itemize}
-        \item Every cell has a numerical address, so the CPU can ask for any specific value directly
-        \item \emph{Random-access}: any address can be reached in roughly the same time
-        \item \emph{Volatile}: turning the power off wipes the contents
+      \item \textbf{Unified:} Both instructions and data are stored in the memory under the same address system
+      \item \textbf{Random-access:} any address can be reached in roughly the same time
+      \item \textbf{Volatile:} turning the power off wipes the contents
     \end{itemize}
+\end{frame}
 
-    \vspace{0.5em}
-    Volatility is why our unsaved work disappears when the computer crashes.
-\note{
-}
+\begin{frame}{Memory}
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+  \textbf{Conceptually:} Memory cells are logical circuits that can ``remember'' their output.
+
+  % TODO: Embed a representative online image of one simple memory cell
+\end{column}
+
+\begin{column}{0.5\textwidth}
+  \textbf{IRL:} Memory was made of magnetic cores in the early days, and of transistors and capacitors nowadays.
+
+  % TODO: Embed a representative online image of modern memory chips IRL
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Memory}
+  Memory cells can be simulated in video games with proper logical circuits or similar mechanics.
+
+  % TODO: Embed two online images, showing example memory cells made in Minecraft and Terraria
+\end{frame}
+
+\begin{frame}{Input/Output (I/O)}
+  The system to enable interactions between computers and the rest of the world.
+
+\begin{itemize}
+  \item \textbf{Input:} Ways to input instructions and data into computers for them to process.
+  \item \textbf{Output:} Ways to output results from computers for us to see.
+\end{itemize}
+
+  In practice, the I/O system is composed of \textbf{input and output devices} that we directly interact with, plus the \textbf{controllers} that make the devices compatible with the rest of the computer.
+\end{frame}
+
+\begin{frame}{Input/Output (I/O)}{Input Devices}
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+  % TODO: Embed an online image of common input devices IRL.
+\end{column}
+
+\begin{column}{0.5\textwidth}
+  % TODO: Embed an online image of a simple input device in Minecraft.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Input/Output (I/O)}{Output Devices}
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+  % TODO: Embed an online image of common output devices IRL.
+\end{column}
+
+\begin{column}{0.5\textwidth}
+  % TODO: Embed an online image of a simple output device in Minecraft.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Input/Output (I/O)}{Devices that do both input and output}
+  % TODO: Embed online images of such devices, like network card.
 \end{frame}
 
 
-\begin{frame}{I/O: the waiters}
-    The \textbf{input/output system} is how data and programs come into the computer from the outside world, and how results go back out.
-    Like the waiters who carry orders into the kitchen and dishes out to the customers.
+\begin{frame}{Bus}
+  A unified pathway that connects all components, where instructions and data flow through.
 
-    \begin{itemize}
-        \item Input: keyboards, mice, microphones, cameras
-        \item Output: monitors, speakers, printers
-        \item Both: network cards, storage drives
-    \end{itemize}
+\begin{itemize}
+  \item \textbf{Address bus:} Transmits addresses (for finding instructions and data)
+  \item \textbf{Data bus:} Transmits instructions and data
+  \item \textbf{Control bus:} Transmits internal control signals like timing and coordination
+\end{itemize}
 
-Each \textbf{I/O device} is connected through a small piece of hardware called an \textbf{I/O controller} that takes care of the device-specific details, so the rest of the computer can treat all of them in a relatively uniform way.
-\note{
-}
+% TODO: Embed online image of abstract illustration of the bus
 \end{frame}
 
 
-\begin{frame}{Bus: the corridors}
-    The set of wires that move instructions and data between every other component.
-    Like the corridors and counters that let staff and trolleys carry orders, ingredients, and dishes around the kitchen.
+\begin{frame}{Bus}{Flexibility of bus}
+  Components can be added or removed with minimal interruptions to other components and the circuit.
 
-    \begin{figure}[htpb]
-        \begin{center}
-            \includegraphics[width=0.5\textwidth]{factorio-bus}
-        \end{center}
-    \end{figure}
-
-    Three logical parts: address bus (which location), data bus (the actual contents), control bus (timing and coordination).
-\note{
-}
+% TODO: Embed two online images, one "spaghetti build", one with bus, both in the game Factorio.
 \end{frame}
 
 
-\begin{frame}{Tracing through one program}
-    The DKK to USD converter from earlier.
 
-    \begin{enumerate}
-        \item I/O loads the program and the input value (\texttt{dkk\_price=599}) into memory
-        \item Control unit fetches \texttt{LOAD dkk\_price}, tells the CPU to bring 599 into itself
-        \item Control unit fetches \texttt{MULTIPLY}, ALU computes 599 * 0.1570 = 94.04
-        \item Result is stored back into memory and sent to I/O for display
-    \end{enumerate}
-
-    \vspace{0.5em}
-A modern Von Neumann architecture computer repeats this loop billions of times per second.
-\note{
-}
-\end{frame}
-
-
-\begin{frame}{Example: Raspberry Pi 5}
-A credit card-size Von Neumann architecture computer.
+\begin{frame}{Von Neumann Architecture IRL}{The circuit board of Raspberry Pi 5}
+    CPU in the middle, RAM next to it, I/O around the edges, copper traces as bus.
 
     \begin{figure}[htpb]
         \begin{center}
             \includegraphics[width=0.6\textwidth]{raspberry-pi}
         \end{center}
     \end{figure}
-
-    CPU in the middle, RAM next to it, I/O around the edges, copper traces between them serve as the bus.
-\note{
-}
 \end{frame}
 
 
