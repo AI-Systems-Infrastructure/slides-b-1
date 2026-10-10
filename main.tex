@@ -84,6 +84,61 @@ subsubsectionstyle=show/shaded/hide]
 \end{frame}
 
 
+\section{Recap}
+
+\begin{frame}{Part A: Interacting with AI Systems}
+  The industry-standard way of clients interacting with AI systems, and how to implement such interactions.
+
+  % TODO: Embed `figures/part-a-overview.pdf`
+\end{frame}
+
+\begin{frame}{Part A: Interacting with AI Systems}{Interaction Protocol: HTTP}
+  The most common communication protocol between clients and AI systems, its core components, and how to implement it using Python.
+
+  % TODO: Figure
+\end{frame}
+
+\begin{frame}{Part A: Interacting with AI Systems}{Implementing AI Systems: API Servers}
+  Serve any AI model behind an API server so that clients can interact with it through HTTP over the internet.
+
+  % TODO: Figure
+\end{frame}
+
+\begin{frame}{Limitation of pure software}
+  Software has to run on hardware. Software alone does not grant us unlimited computing power needed to scale up AI systems.
+
+  % TODO: Figure
+\end{frame}
+
+\begin{frame}{Limitation of pure software}{Test the limit of your hardware}
+\begin{itemize}
+    \item Send 10 requests per second to your API server 
+    \item Run a state-of-the-art large language model from HuggingFace
+\end{itemize}
+
+  % TODO: Embed an image found online of burning laptop
+\end{frame}
+
+\begin{frame}{Module B.1: AI Hardware Infrastructure}
+  We need hardware better suited for running AI systems. Also more of it.
+
+\note{
+\begin{itemize}
+  \item No: A way to get more hardware out of thin air
+  \item Yes: Knowledge you can use to convince your boss to purchase you more hardware
+\end{itemize}
+}
+\end{frame}
+
+\begin{frame}{Module B.1: AI Hardware Infrastructure}{Overview of the module}
+\begin{itemize}
+  \item The hardware architecture that rules (almost) all computers: \textbf{The Von Neumann architecture}
+  \item Limitation of the Von Neumann architecture on computing AI models
+  \item \textbf{Specialized hardware} for computing AI models faster and/or more efficiently
+  \item How specialized hardware still fits into the Von Neumann architecture
+\end{itemize}
+\end{frame}
+
 
 \section{Why Think About Hardware}
 
