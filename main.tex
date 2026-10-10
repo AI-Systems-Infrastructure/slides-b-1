@@ -344,120 +344,102 @@ subsubsectionstyle=show/shaded/hide]
 \end{frame}
 
 
+\section{Specialized Hardware}
 
-\section{Where Generic Hardware Falls Short}
+\begin{frame}{Shape of AI compute}
+\begin{itemize}
+  \item Modern powerful AI models are mostly based on neural networks, whose compute involves lots of \textit{matrix multiplication}
+  \item Matrix multiplication can be decomposed into lots of \textit{independent} weighted sums, each very elementary to compute
+\end{itemize}
+  AI compute prioritizes \textbf{parallelism} over \textbf{complexity}.
 
-\begin{frame}{Two limitations for AI workloads}
-    The architecture above describes a \emph{general-purpose} computer.
-    It can run anything you throw at it: web browsers, video games, spreadsheets, compilers, and AI models, but not always in the most efficient way.
-
-    \begin{block}{1. Sequential speed vs parallel demand}
-        CPUs are tuned for sequential execution, finishing one instruction quickly before the next.
-        AI workloads usually heavily demand parallel compute.
-    \end{block}
-
-    \begin{block}{2. Memory bandwidth bottleneck}
-        Even when the CPU is fast enough to compute, it often spends most of its time waiting for data to arrive from memory.
-    \end{block}
-\note{
-}
+% TODO: Embed online images showing how matrix multiplication can be decomposed into elementary calculations
 \end{frame}
 
-
-\begin{frame}{Sequential CPU vs parallel work}
-Most of the math inside a neural network is \textbf{matrix multiplication}.
-    For a single matrix multiplication there can be hundreds of thousands of these tiny calculations, and none of them depend on each other.
-
-    \vspace{0.5em}
-A CPU faced with this kind of work is a bit like a \textit{university professor} faced with a giant stack of basic arithmetic worksheets.
-    Each problem is well below the professor's pay grade, but solving them one by one still takes forever.
-
-    \vspace{0.5em}
-A whole class of \textit{primary school students}, each only able to do basic arithmetic, can power through the same stack much faster.
-\note{
-}
-\end{frame}
-
-
-\begin{frame}{The memory wall}
-There are two opposing aspects of memory performance.
+\begin{frame}{Limitation of generic computers}
+  CPUs specialize in \textbf{sequential} execution of \textbf{complex instructions}.
 
 \begin{itemize}
-    \item \textbf{Latency}: how long a single piece of data takes to arrive once requested
-    \item \textbf{Bandwidth}: how much data can be moved per second
+  \item Each CPU core can handle complex instructions relatively fast, but there are usually \textit{only a few cores} in a CPU
+  \item CPUs are usually paired with memory with \textit{low latency} but also relatively \textit{low bandwidth}
 \end{itemize}
 
-A CPU's memory is built around low latency at the cost of bandwidth. Typical DDR5 peaks at around 50 to 100 GB/s.
+  \note{
+    Letting CPUs handle AI compute is like letting one mathematics professor handle a thousand elementary school math problems.
+  }
+\end{frame}
 
-For modern AI models, we want to load a large chunk of data into the memory as fast as possible, which biases towards memory bandwidth.
-\note{
-}
+\begin{frame}{Limitation of generic computers}{Latency vs. bandwidth}
+\begin{itemize}
+    \item \textbf{Latency}: How long a single piece of data takes to arrive once requested
+    \item \textbf{Bandwidth}: How much data can be moved per second
+\end{itemize}
+Unfortunately, these are two opposing properties of a memory system.
+\end{frame}
+
+\begin{frame}{Ideal hardware for AI compute}
+  Hardware capable of performing elementary computations in parallel.
+
+\begin{itemize}
+  \item Have \textit{a lot of cores}, each of which can be simple and only capable of executing elementary instructions
+  \item Pair with memory with \textit{high bandwidth} at the expense of relatively \textit{high latency}
+\end{itemize}
+
+  \note{
+    Letting a thousand elementary school students solve a thousand simple math problems.
+  }
 \end{frame}
 
 
+\begin{frame}{Common specialized hardware}{Graphics Processing Unit (GPU)}
+\begin{itemize}
+  \item Originally designed for rendering computer graphics (such as video games and GUIs)
+  \item Rendering computer graphics and computing AI models are very similar in shape
+\end{itemize}
 
-\section{Specialized Hardware for AI}
+% TODO: Embed an online image showing why computer graphics also is composed of parallelized simple math
+\end{frame}
 
-\begin{frame}{Where the chips come in}
-    The two limitations point to the same conclusion.
-    AI workloads need hardware that is designed to efficiently handle AI computing workloads.
+\begin{frame}{Common specialized hardware}{GPU circuit}
+\begin{itemize}
+  \item Each GPU core is still made of transistors and logic circuits similar to ALUs, but much smaller and simpler than a CPU core
+  \item A single GPU chip can have thousands of cores
+\end{itemize}
 
-    \begin{itemize}
-        \item Many simple operations in parallel
-        \item High-bandwidth memory to feed them
-    \end{itemize}
+% TODO: Embed online images comparing modern CPU and GPU chips, showing that GPUs are usually stacking much smaller cores but a lot more of them
+\end{frame}
 
-    \vspace{0.5em}
-    Several families of chips have been built around this idea, each at a different sweet spot of generality and efficiency.
-\note{
-}
+\begin{frame}{Common specialized hardware}{Commonly used GPUs IRL}
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+  Technically necessary for any computer that outputs graphics. Usually made by NVIDIA, AMD, Intel, ARM, etc.
+  % TODO: Embed an online image of an Nvidia graphics card.
+\end{column}
+
+\begin{column}{0.5\textwidth}
+  GPUs made only for AI compute, known as data center GPUs.
+  % TODO: Embed an online image of latest quarter of NVIDIA's income breakdown showing the dominance of data center section.
+\end{column}
+\end{columns}
 \end{frame}
 
 
-\begin{frame}{Graphics Processing Unit (GPU)}
-    As the name suggests, GPUs were originally designed for computer graphics, not AI.
-
-    Rendering a 3D scene means computing the color of millions of pixels every frame, each independent of the rest, same workloads as AI models.
-
-    \begin{figure}[htpb]
-        \begin{center}
-            \includegraphics[width=0.5\textwidth]{cpu-gpu}
-        \end{center}
-\caption*{A GPU usually comes with thousands of small cores, plus memory built for bandwidth (GDDR7 around 1.8 TB/s, HBM above 2 TB/s).}
-    \end{figure}
-\note{
-}
-\end{frame}
-
-
-\begin{frame}{Tensor Processing Unit (TPU)}
-    GPUs are still general-purpose enough to handle graphics, scientific simulation, and video encoding.
-    That generality can limit how efficient they can be on AI workloads.
-
-\vspace{0.5em}
-    Google's \textbf{TPUs} are a type of hardware built specifically for AI model computing.
+\begin{frame}{Common specialized hardware}{Tensor Processing Unit (TPU)}
+  Developed by Google only for AI compute.
 
     \begin{figure}[htpb]
         \begin{center}
             \includegraphics[width=0.35\textwidth]{tpu-architecture}
         \end{center}
     \end{figure}
-
-In reality, GPUs still dominate in specialized hardware for AI computing.
-\note{
-}
 \end{frame}
 
 
-\begin{frame}{Neural Processing Unit (NPU)}
-    GPUs and TPUs both target high-end computing.
-    NPUs target the low end: consumer devices like phones, tablets, and laptops.
-
-    \begin{itemize}
-        \item Built for \emph{inference}, not training
-        \item Lower-precision arithmetic, often 8-bit or even 4-bit
-        \item Smaller circuits, lower power draw
-    \end{itemize}
+\begin{frame}{Common specialized hardware}{Neural Processing Unit (NPU)}
+\begin{itemize}
+  \item A type of AI compute hardware that prioritizes \textit{power efficiency} over speed, to be used on edge devices
+  \item Usually only powerful enough to inference an AI model, not to train one
+\end{itemize}
 
     \begin{figure}[htpb]
         \begin{center}
@@ -472,8 +454,6 @@ In reality, GPUs still dominate in specialized hardware for AI computing.
             \end{subfigure}
         \end{center}
     \end{figure}
-\note{
-}
 \end{frame}
 
 
