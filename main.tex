@@ -89,25 +89,41 @@ subsubsectionstyle=show/shaded/hide]
 \begin{frame}{Part A: Interacting with AI Systems}
   The industry-standard way of clients interacting with AI systems, and how to implement such interactions.
 
-  % TODO: Embed `figures/part-a-overview.pdf`
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{part-a-overview}
+      \end{center}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Part A: Interacting with AI Systems}{Interaction Protocol: HTTP}
   The most common communication protocol between clients and AI systems, its core components, and how to implement it using Python.
 
-  % TODO: Embed figures/module-a1-http-request-response.pdf
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=0.85\textwidth,height=0.65\textheight,keepaspectratio]{module-a1-http-request-response}
+      \end{center}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Part A: Interacting with AI Systems}{Implementing AI Systems: API Servers}
   Serve any AI model behind an API server so that clients can interact with it through HTTP over the internet.
 
-  % TODO: Embed an online image, illustrating how AI models sits behind API servers, as a way to serve AI models over the internet
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=0.75\textwidth,height=0.62\textheight,keepaspectratio]{model-behind-api-server}
+      \end{center}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Limitation of pure software}
   Software has to run on hardware. Software alone does not grant us unlimited computing power needed to scale up AI systems.
 
-  % TODO: Embed a new figure, which is based on `figures/part-a-overview.pdf`, but on the bottom, a red outline box with red text "Hardware?"
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{module-b1-software-hardware}
+      \end{center}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Limitation of pure software}{Test the limit of your hardware}
@@ -116,11 +132,29 @@ subsubsectionstyle=show/shaded/hide]
     \item Run a state-of-the-art large language model from HuggingFace
 \end{itemize}
 
-  % TODO: Embed an image found online of burning laptop
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=0.8\textwidth,height=0.55\textheight,keepaspectratio]{burning-laptop}
+      \end{center}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Module B.1: AI Hardware Infrastructure}
   We need hardware better suited for running AI systems. Also more of it.
+
+  \begin{figure}[htpb]
+      \begin{center}
+          \begin{subfigure}{0.337\textwidth}
+              \includegraphics[width=\textwidth]{nvidia-hgx-b200}
+              \caption{Better suited: NVIDIA HGX B200}
+          \end{subfigure}
+          \hspace{0.05\textwidth}
+          \begin{subfigure}{0.513\textwidth}
+              \includegraphics[width=\textwidth]{alps-supercomputer}
+              \caption{More of it: Alps supercomputer}
+          \end{subfigure}
+      \end{center}
+  \end{figure}
 
 \note{
 \begin{itemize}
@@ -146,19 +180,27 @@ subsubsectionstyle=show/shaded/hide]
 \begin{frame}{What is a computer?}{Iterations of computers}
   From a consumer standpoint: Computers have become more powerful, can be used to do more stuff, and come with more form factors.
 
-  % TODO: Embed an image found online of the timeline of iterations of consumer computers
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=\textwidth]{computer-timeline}
+      \end{center}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{What is a computer?}{The architecture that stands the test of time}
   From an architecture standpoint: The Von Neumann Architecture has dominated most computers since the early 1950s, and so has how a computer works fundamentally.
 
-  % TODO: Embed an image that best represents the dominance of the architecture, corresponding to the image in the previous slide
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=\textwidth]{computer-timeline-von-neumann}
+      \end{center}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{What is a computer?}{How a computer works fundamentally}
   Process \textbf{data} following \textbf{instructions}.
 
-\begin{columns}[c]
+\begin{columns}[t]
 \begin{column}{0.5\textwidth}
 \begin{block}{Data}
 \begin{itemize}
@@ -191,13 +233,34 @@ subsubsectionstyle=show/shaded/hide]
 \begin{frame}{Overview of the Von Neumann Architecture}
   A philosophical architecture to build a computer that can process data following instructions.
 
-  % TODO: Embed figures/module-b1-computer-architecture.pdf
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=0.9\textwidth,height=0.72\textheight,keepaspectratio]{module-b1-computer-architecture}
+      \end{center}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Central Processing Unit (CPU)}
   Processes instructions on data. Composed of two sub-components: the arithmetic logic unit (ALU) and the control unit (CU).
 
-  % TODO: Embed online images of modern CPUs (from Intel, AMD, and ARM)
+  \begin{figure}[htpb]
+      \begin{center}
+          \begin{subfigure}{0.209\textwidth}
+              \includegraphics[width=\textwidth]{intel-core-i9-14900kf-crop}
+              \caption{Intel}
+          \end{subfigure}
+          \hspace{0.05\textwidth}
+          \begin{subfigure}{0.25\textwidth}
+              \includegraphics[width=\textwidth]{amd-ryzen-9-9950x-crop}
+              \caption{AMD}
+          \end{subfigure}
+          \hspace{0.05\textwidth}
+          \begin{subfigure}{0.216\textwidth}
+              \includegraphics[width=\textwidth]{apple-m2-crop}
+              \caption{ARM (Apple M2)}
+          \end{subfigure}
+      \end{center}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Central Processing Unit (CPU)}{Arithmetic logic unit (ALU)}
@@ -213,17 +276,34 @@ subsubsectionstyle=show/shaded/hide]
 
 \begin{frame}{Central Processing Unit (CPU)}{Arithmetic logic unit (ALU)}
 
-\begin{columns}[c]
+\begin{columns}[T]
 \begin{column}{0.5\textwidth}
   \textbf{Conceptually:} ALUs are logical circuits that can execute elementary operations.
 
-  % TODO: Embed a representative online image of one simple logical circuit (for example an XOR gate)
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=0.9\linewidth]{xor-gate}
+          \caption*{XOR gate built from four NAND gates}
+      \end{center}
+  \end{figure}
 \end{column}
 
 \begin{column}{0.5\textwidth}
   \textbf{IRL:} ALUs were made of vacuum tubes in the early days, and of extremely small transistors nowadays.
 
-  % TODO: Embed representative online images of ALUs made of vacuum tubes and transistors IRL
+  \begin{figure}[htpb]
+      \begin{center}
+          \begin{subfigure}{0.5\linewidth}
+              \includegraphics[width=\textwidth]{vacuum-tube-module}
+              \caption{Vacuum tubes (1950s)}
+          \end{subfigure}
+          \hfill
+          \begin{subfigure}{0.437\linewidth}
+              \includegraphics[width=\textwidth]{cpu-die-shot}
+              \caption{Transistors (2024)}
+          \end{subfigure}
+      \end{center}
+  \end{figure}
 \end{column}
 \end{columns}
 \end{frame}
@@ -231,13 +311,29 @@ subsubsectionstyle=show/shaded/hide]
 \begin{frame}{Central Processing Unit (CPU)}{Arithmetic logic unit (ALU)}
   ALUs can be simulated in video games with proper logical circuits.
 
-  % TODO: Embed two online images, showing example ALUs made in Minecraft and Terraria
+  \begin{figure}[htpb]
+      \begin{center}
+          \begin{subfigure}{0.42\textwidth}
+              \includegraphics[width=\textwidth]{minecraft-alu}
+              \caption{Minecraft}
+          \end{subfigure}
+          \hspace{0.05\textwidth}
+          \begin{subfigure}{0.42\textwidth}
+              \includegraphics[width=\textwidth]{terraria-alu-clean}
+              \caption{Terraria}
+          \end{subfigure}
+      \end{center}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Central Processing Unit (CPU)}{Control unit (CU)}
   Fetching and breaking down instructions and data into elementary operations ALUs can execute.
 
-  % TODO: Embed an online image of how CU and ALU work together. This image should also include memory to transition to the next slide.
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=0.9\textwidth,height=0.66\textheight,keepaspectratio]{cpu-block-diagram}
+      \end{center}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Memory}
@@ -251,17 +347,26 @@ subsubsectionstyle=show/shaded/hide]
 \end{frame}
 
 \begin{frame}{Memory}
-\begin{columns}[c]
+\begin{columns}[T]
 \begin{column}{0.5\textwidth}
   \textbf{Conceptually:} Memory cells are logical circuits that can ``remember'' their output.
 
-  % TODO: Embed a representative online image of one simple memory cell
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=0.6\linewidth]{sr-latch}
+          \caption*{SR latch built from two NOR gates}
+      \end{center}
+  \end{figure}
 \end{column}
 
 \begin{column}{0.5\textwidth}
   \textbf{IRL:} Memory was made of magnetic cores in the early days, and of transistors and capacitors nowadays.
 
-  % TODO: Embed a representative online image of modern memory chips IRL
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=\linewidth]{ddr5-memory-module}
+      \end{center}
+  \end{figure}
 \end{column}
 \end{columns}
 \end{frame}
@@ -269,7 +374,19 @@ subsubsectionstyle=show/shaded/hide]
 \begin{frame}{Memory}
   Memory cells can be simulated in video games with proper logical circuits or similar mechanics.
 
-  % TODO: Embed two online images, showing example memory cells made in Minecraft and Terraria
+  \begin{figure}[htpb]
+      \begin{center}
+          \begin{subfigure}{0.562\textwidth}
+              \includegraphics[width=\textwidth]{minecraft-rs-nor-latch}
+              \caption{Minecraft}
+          \end{subfigure}
+          \hspace{0.04\textwidth}
+          \begin{subfigure}{0.358\textwidth}
+              \includegraphics[width=\textwidth]{terraria-registers}
+              \caption{Terraria}
+          \end{subfigure}
+      \end{center}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Input/Output (I/O)}
@@ -286,11 +403,21 @@ subsubsectionstyle=show/shaded/hide]
 \begin{frame}{Input/Output (I/O)}{Input Devices}
 \begin{columns}[c]
 \begin{column}{0.5\textwidth}
-  % TODO: Embed an online image of common input devices IRL.
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=0.95\linewidth,height=0.65\textheight,keepaspectratio]{input-devices}
+          \caption*{Real input devices}
+      \end{center}
+  \end{figure}
 \end{column}
 
 \begin{column}{0.5\textwidth}
-  % TODO: Embed an online image of a simple input device in Minecraft.
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=0.95\linewidth,height=0.65\textheight,keepaspectratio]{minecraft-lever}
+          \caption*{Minecraft: lever}
+      \end{center}
+  \end{figure}
 \end{column}
 \end{columns}
 \end{frame}
@@ -298,17 +425,44 @@ subsubsectionstyle=show/shaded/hide]
 \begin{frame}{Input/Output (I/O)}{Output Devices}
 \begin{columns}[c]
 \begin{column}{0.5\textwidth}
-  % TODO: Embed an online image of common output devices IRL.
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=0.95\linewidth,height=0.65\textheight,keepaspectratio]{output-devices}
+          \caption*{Real output devices}
+      \end{center}
+  \end{figure}
 \end{column}
 
 \begin{column}{0.5\textwidth}
-  % TODO: Embed an online image of a simple output device in Minecraft.
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=0.95\linewidth,height=0.65\textheight,keepaspectratio]{minecraft-lamp-lit}
+          \caption*{Minecraft: redstone lamp}
+      \end{center}
+  \end{figure}
 \end{column}
 \end{columns}
 \end{frame}
 
 \begin{frame}{Input/Output (I/O)}{Devices that do both input and output}
-  % TODO: Embed online images of such devices, like network card.
+  \begin{figure}[htpb]
+      \begin{center}
+          \begin{subfigure}[t]{0.412\textwidth}
+              \includegraphics[width=\textwidth]{network-card}
+              \caption{Network interface card}
+          \end{subfigure}
+          \hspace{0.04\textwidth}
+          \begin{subfigure}[t]{0.227\textwidth}
+              \includegraphics[width=\textwidth]{touchscreen-tablet}
+              \caption{Touchscreen}
+          \end{subfigure}
+          \hspace{0.04\textwidth}
+          \begin{subfigure}[t]{0.241\textwidth}
+              \includegraphics[width=\textwidth]{headset-with-mic}
+              \caption{Headset with microphone}
+          \end{subfigure}
+      \end{center}
+  \end{figure}
 \end{frame}
 
 
@@ -321,14 +475,30 @@ subsubsectionstyle=show/shaded/hide]
   \item \textbf{Control bus:} Transmits internal control signals like timing and coordination
 \end{itemize}
 
-% TODO: Embed online image of abstract illustration of the bus
+\begin{figure}[htpb]
+    \begin{center}
+        \includegraphics[width=0.6\textwidth,height=0.48\textheight,keepaspectratio]{computer-system-bus}
+    \end{center}
+\end{figure}
 \end{frame}
 
 
 \begin{frame}{Bus}{Flexibility of bus}
   Components can be added or removed with minimal interruptions to other components and the circuit.
 
-% TODO: Embed two online images, one "spaghetti build", one with bus, both in the game Factorio.
+\begin{figure}[htpb]
+    \begin{center}
+        \begin{subfigure}{0.42\textwidth}
+            \includegraphics[width=\textwidth]{factorio-spaghetti}
+            \caption{Spaghetti}
+        \end{subfigure}
+        \hspace{0.05\textwidth}
+        \begin{subfigure}{0.42\textwidth}
+            \includegraphics[width=\textwidth]{factorio-main-bus-zoom}
+            \caption{Main bus}
+        \end{subfigure}
+    \end{center}
+\end{figure}
 \end{frame}
 
 
@@ -353,7 +523,19 @@ subsubsectionstyle=show/shaded/hide]
 \end{itemize}
   AI compute prioritizes \textbf{parallelism} over \textbf{complexity}.
 
-% TODO: Embed online images showing how matrix multiplication can be decomposed into elementary calculations
+\begin{figure}[htpb]
+    \begin{center}
+        \begin{subfigure}[b]{0.27\textwidth}
+            \includegraphics[width=\textwidth]{matrix-multiplication-row-column}
+            \caption{Row $\times$ column}
+        \end{subfigure}
+        \hspace{0.03\textwidth}
+        \begin{subfigure}[b]{0.68\textwidth}
+            \includegraphics[width=\textwidth]{matrix-multiplication-weighted-sum}
+            \caption{Weighted sum example}
+        \end{subfigure}
+    \end{center}
+\end{figure}
 \end{frame}
 
 \begin{frame}{Limitation of generic computers}
@@ -397,7 +579,19 @@ Unfortunately, these are two opposing properties of a memory system.
   \item Rendering computer graphics and computing AI models are very similar in shape
 \end{itemize}
 
-% TODO: Embed an online image showing why computer graphics also is composed of parallelized simple math
+\begin{figure}[htpb]
+    \begin{center}
+        \begin{subfigure}{0.442\textwidth}
+            \includegraphics[width=\textwidth]{dolphin-triangle-mesh}
+            \caption{Triangle mesh}
+        \end{subfigure}
+        \hspace{0.05\textwidth}
+        \begin{subfigure}{0.276\textwidth}
+            \includegraphics[width=\textwidth]{rasterization-triangle}
+            \caption{Rasterization}
+        \end{subfigure}
+    \end{center}
+\end{figure}
 \end{frame}
 
 \begin{frame}{Common specialized hardware}{GPU circuit}
@@ -406,19 +600,41 @@ Unfortunately, these are two opposing properties of a memory system.
   \item A single GPU chip can have thousands of cores
 \end{itemize}
 
-% TODO: Embed online images comparing modern CPU and GPU chips, showing that GPUs are usually stacking much smaller cores but a lot more of them
+\begin{figure}[htpb]
+    \begin{center}
+        \begin{subfigure}{0.413\textwidth}
+            \includegraphics[width=\textwidth]{intel-i9-13900k-die}
+            \caption{CPU: Intel Core i9-13900K (24 cores)}
+        \end{subfigure}
+        \hspace{0.05\textwidth}
+        \begin{subfigure}{0.348\textwidth}
+            \includegraphics[width=\textwidth]{nvidia-ga100-die}
+            \caption{GPU: NVIDIA GA100 (8192 cores)}
+        \end{subfigure}
+    \end{center}
+\end{figure}
 \end{frame}
 
 \begin{frame}{Common specialized hardware}{Commonly used GPUs IRL}
-\begin{columns}[c]
+\begin{columns}[b]
 \begin{column}{0.5\textwidth}
   Technically necessary for any computer that outputs graphics. Usually made by NVIDIA, AMD, Intel, ARM, etc.
-  % TODO: Embed an online image of an Nvidia graphics card.
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=\linewidth,height=0.5\textheight,keepaspectratio]{nvidia-rtx-5090}
+          \caption*{NVIDIA GeForce RTX 5090}
+      \end{center}
+  \end{figure}
 \end{column}
 
 \begin{column}{0.5\textwidth}
   GPUs made only for AI compute, known as data center GPUs.
-  % TODO: Embed an online image of latest quarter of NVIDIA's income breakdown showing the dominance of data center section.
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=\linewidth,height=0.5\textheight,keepaspectratio]{nvidia-q2-fy27-revenue-sankey}
+          \caption*{NVIDIA revenue by segment, Q2 FY27}
+      \end{center}
+  \end{figure}
 \end{column}
 \end{columns}
 \end{frame}
@@ -429,7 +645,7 @@ Unfortunately, these are two opposing properties of a memory system.
 
     \begin{figure}[htpb]
         \begin{center}
-            \includegraphics[width=0.35\textwidth]{tpu-architecture}
+            \includegraphics[width=0.5\textwidth]{tpu-architecture}
         \end{center}
     \end{figure}
 \end{frame}
@@ -479,7 +695,11 @@ Unfortunately, these are two opposing properties of a memory system.
 \begin{frame}{Coming back to Von Neumann}
   Specialized hardware for AI compute \textbf{plugs into} the Von Neumann architecture rather than replacing it.
 
-  % TODO: Embed an online image of how a GPU plugs into the Von Neumann architecture through attaching to the bus.
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=0.7\textwidth,height=0.65\textheight,keepaspectratio]{gpu-on-system-bus}
+      \end{center}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Coming back to Von Neumann}
@@ -489,7 +709,12 @@ Unfortunately, these are two opposing properties of a memory system.
 \end{itemize}
 We still need all Von Neumann components, on top of specialized hardware, to build an ``AI computer''.
 
-  % TODO: Embed an online image showing the recent RAM crisis
+  \begin{figure}[htpb]
+      \begin{center}
+          \includegraphics[width=0.8\textwidth,height=0.42\textheight,keepaspectratio]{ddr5-price-trend-2026-annotated}
+          \caption*{Average price of a DDR5-6000 2$\times$32 GB RAM kit, April 2025 to October 2026}
+      \end{center}
+  \end{figure}
 \end{frame}
 
 
@@ -513,7 +738,11 @@ We still need all Von Neumann components, on top of specialized hardware, to bui
   \item \textbf{In the next module:} Technical nuances of ``works everywhere'', and how to deploy our AI system on any* computer with ease
 \end{itemize}
 
-% TODO: Embed figures/module-b2-container-ship.pdf
+\begin{figure}[htpb]
+    \begin{center}
+        \includegraphics[width=0.8\textwidth,height=0.5\textheight,keepaspectratio]{module-b2-container-ship}
+    \end{center}
+\end{figure}
 \end{frame}
 
 
